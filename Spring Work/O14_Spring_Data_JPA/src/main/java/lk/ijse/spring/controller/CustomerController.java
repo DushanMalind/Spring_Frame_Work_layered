@@ -18,7 +18,7 @@ public class CustomerController {
     CustomerService service;
 
     @PostMapping
-    public ResponseUtil addCustomer(@ModelAttribute CustomerDTO dto){
+    public ResponseUtil addCustomer(CustomerDTO dto){
         service.addCustomer(dto);
         return new ResponseUtil("Ok","Successfully Added",dto);
     }

@@ -29,7 +29,7 @@ public class ItemController {
     ItemService itemService;
 
     @PostMapping
-    public ResponseUtil saveItem(@ModelAttribute ItemDTO dto){
+    public ResponseUtil saveItem(ItemDTO dto){
         itemService.saveItem(dto);
         return new ResponseUtil("Ok","Successfully Added",dto);
     }
