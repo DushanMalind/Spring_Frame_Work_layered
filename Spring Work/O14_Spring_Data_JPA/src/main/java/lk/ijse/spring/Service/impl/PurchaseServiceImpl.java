@@ -54,6 +54,7 @@ public class PurchaseServiceImpl implements PurchaseService {
         for (OrderDetails orderDetails : map.getOrderDetails()) {
             Item item = itemRepo.findById(orderDetails.getItemCode()).get();
             item.setQtyOnHand(item.getQtyOnHand()-orderDetails.getQty());
+            itemRepo.save(item);
 
         }
 
