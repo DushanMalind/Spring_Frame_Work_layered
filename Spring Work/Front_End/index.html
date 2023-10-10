@@ -908,7 +908,7 @@
       success: function (res) {
         let items = res.data;
         for (let i = 0; i < items.length; i++) {
-          let id = items[i].id;
+          let id = items[i].code;
          /* let description = items[i].description;
           let unitPrice = items[i].unitPrice;
           let qty = items[i].qty;*/
@@ -998,7 +998,7 @@ searchItems();
 
       success:function (resp){
         response=resp.data.filter((c)=>{
-          return c.id==code;
+          return c.code==code;
         })
       }
     });
@@ -1024,7 +1024,7 @@ searchItems();
     let res=searchItems(code);
     if (res.length>0){
       $("#orderItemDescription").val(res[0].description);
-      $("#orderQTYOnHand").val(res[0].qty);
+      $("#orderQTYOnHand").val(res[0].qtyOnHand);
       $("#orderItemPrice").val(res[0].unitPrice);
 
     }
@@ -1039,13 +1039,15 @@ searchItems();
     let unitPrice=$("#orderItemPrice").val();
     let avQty=$("#txtItemQty").val();
     let qty=$("#txtQty").val();
+    let orderId=$("#orderId").val();
 
 
 
     let total=unitPrice*qty;
 
     let itemOB={
-      code:code,
+      oid:orderId,
+      itemCode:code,
       description:description,
       unitPrice:unitPrice,
       qty:qty
@@ -1099,17 +1101,16 @@ searchItems();
     let unitPrice=$("#orderItemPrice").val();
 
     let order={
-      "orderId":orderId,
-      "date":date,
-      "customerId":customerId,
-      //"cartItems":JSON.stringify(cartItemsRow)
-      "cartItems":cartItemsRow
+      oid:orderId,
+      date:date,
+      cusID:customerId,
+      orderDetails:cartItemsRow
     };
 
     console.log(JSON.stringify(order));
 
     $.ajax({
-      url:BASE_URL+"purchaseOrder",
+      url:BASE_URL+"purchase",
       method:"POST",
       data:JSON.stringify(order),
       contentType:"application/json",

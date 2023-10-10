@@ -25,7 +25,7 @@ public class PurchaseOrderController {
 
     @PostMapping
     public ResponseUtil PurchaseOrder(@RequestBody OrdersDTO od){
-        purchaseService.PurchaseOrder(od);
-        return new ResponseUtil("Ok","Success",od);
+      purchaseService.PurchaseOrder(od);
+        return new ResponseUtil("Ok","Successfully Added",od);
     }
 }

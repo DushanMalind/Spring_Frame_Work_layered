@@ -43,10 +43,10 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Override
     public void PurchaseOrder(OrdersDTO dto) {
+
         if (ordersRepo.existsById(dto.getOid())){
             throw new RuntimeException(dto.getOid()+"Order Already Exist");
         }
-
         Orders map = mapper.map(dto, Orders.class);
         ordersRepo.save(map);
 
